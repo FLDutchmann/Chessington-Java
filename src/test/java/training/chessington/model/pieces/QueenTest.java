@@ -89,7 +89,7 @@ public class QueenTest {
 
 
     @Test
-    public void queenCanTakePieceOfDifferentColor() {
+    public void queenCanTakePieceOfDifferentColorDiagonally() {
         // Arrange
         Board board = Board.empty();
         Piece whiteQueen = new Queen(PlayerColour.WHITE);
@@ -110,7 +110,7 @@ public class QueenTest {
     }
 
     @Test
-    public void queenCannotTakePieceOfSameColor() {
+    public void queenCannotTakePieceOfSameColorDiagonally() {
         // Arrange
         Board board = Board.empty();
         Piece whitePiece = new Queen(PlayerColour.WHITE);
