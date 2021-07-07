@@ -19,7 +19,7 @@ public class Pawn extends AbstractPiece {
         if (from.getRow() != 0 && getColour().equals(PlayerColour.WHITE)) {
             if (board.get(from.plus(-1, 0)) == null) {
                 moves.add(new Move(from, from.plus(-1, 0)));
-                if (board.get(from.plus(-2, 0)) == null && from.getRow() == 6)
+                if (from.getRow() == 6 && board.get(from.plus(-2, 0)) == null)
                     moves.add(new Move(from, from.plus(-2, 0)));
             }
 
@@ -38,7 +38,7 @@ public class Pawn extends AbstractPiece {
         if (from.getRow() != 7 && getColour().equals(PlayerColour.BLACK)) {
             if (board.get(from.plus(+1, 0)) == null) {
                 moves.add(new Move(from, from.plus(+1, 0)));
-                if (board.get(from.plus(+2, 0)) == null && from.getRow() == 1)
+                if (from.getRow() == 1 && board.get(from.plus(+2, 0)) == null)
                     moves.add(new Move(from, from.plus(+2, 0)));
             }
 

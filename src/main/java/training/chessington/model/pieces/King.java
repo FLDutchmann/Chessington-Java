@@ -20,8 +20,12 @@ public class King extends AbstractPiece {
         for(int row = -1; row < 2; row++) {
             for(int col = -1; col < 2; col++) {
                 Coordinates to = from.plus(row, col);
-                if (!from.equals(to) && to.isInBounds()) moves.add(new Move(from, to));
+                if (!from.equals(to) && to.isInBounds() &&
+                        (board.get(to) == null || !board.get(to).getColour().equals(colour)))
+                    moves.add(new Move(from, to));
             }
         }
+
+        return moves;
     }
 }

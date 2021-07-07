@@ -66,11 +66,9 @@ public class KingTest {
 
         // Act
         List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteKingCoords, board);
-        List<Move> blackMoves = otherPiece.getAllowedMoves(otherPieceCoordinates, board);
 
         // Assert
         assertThat(whiteMoves).contains(new Move(whiteKingCoords, otherPieceCoordinates));
-        assertThat(blackMoves).contains(new Move(otherPieceCoordinates, whiteKingCoords));
     }
 
     @Test
@@ -87,10 +85,8 @@ public class KingTest {
 
         // Act
         List<Move> whiteMoves = whitePiece.getAllowedMoves(whitePieceCoords, board);
-        List<Move> othersMoves = otherPiece.getAllowedMoves(otherPieceCoords, board);
 
         // Assert
         assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
-        assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
 }
