@@ -281,4 +281,25 @@ public class QueenTest {
         assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
         assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
+
+    @Test
+    public void queenCannotMoveOffBoard() {
+        // Arrange
+        Board board = Board.empty();
+        Piece whiteQueen = new Queen(PlayerColour.WHITE);
+        Coordinates whiteQueenCoords = new Coordinates(0, 0);
+        board.placePiece(whiteQueenCoords, whiteQueen);
+
+        Piece blackQueen = new Queen(PlayerColour.BLACK);
+        Coordinates blackQueenCoords = new Coordinates(7, 7);
+        board.placePiece(blackQueenCoords, blackQueen);
+
+        // Act
+        List<Move> whiteMoves = whiteQueen.getAllowedMoves(whiteQueenCoords, board);
+        List<Move> blackMoves = blackQueen.getAllowedMoves(blackQueenCoords, board);
+
+        // Assert
+        assertThat(whiteMoves).allMatch( (move) -> move.getTo().isInBounds() );
+        assertThat(blackMoves).allMatch( (move) -> move.getTo().isInBounds() );
+    }
 }

@@ -89,4 +89,25 @@ public class KingTest {
         // Assert
         assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
     }
+
+    @Test
+    public void kingCannotMoveOffBoard() {
+        // Arrange
+        Board board = Board.empty();
+        Piece whitePiece = new King(PlayerColour.WHITE);
+        Coordinates whitePieceCoords = new Coordinates(0, 0);
+        board.placePiece(whitePieceCoords, whitePiece);
+
+        Piece blackPiece = new Pawn(PlayerColour.BLACK);
+        Coordinates blackPieceCoords = new Coordinates(7, 7);
+        board.placePiece(blackPieceCoords, blackPiece);
+
+        // Act
+        List<Move> whiteMoves = whitePiece.getAllowedMoves(whitePieceCoords, board);
+        List<Move> blackMoves = blackPiece.getAllowedMoves(blackPieceCoords, board);
+
+        // Assert
+        assertThat(whiteMoves).allMatch( (move) -> move.getTo().isInBounds() );
+        assertThat(blackMoves).allMatch( (move) -> move.getTo().isInBounds() );
+    }
 }

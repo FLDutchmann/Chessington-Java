@@ -97,4 +97,25 @@ public class KnightTest {
         assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
         assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
+
+    @Test
+    public void knightCannotMoveOffBoard() {
+        // Arrange
+        Board board = Board.empty();
+        Piece whiteKnight = new Knight(PlayerColour.WHITE);
+        Coordinates whiteKnightCoords = new Coordinates(0, 0);
+        board.placePiece(whiteKnightCoords, whiteKnight);
+
+        Piece blackKnight = new Knight(PlayerColour.BLACK);
+        Coordinates blackKnightCoords = new Coordinates(7, 7);
+        board.placePiece(blackKnightCoords, blackKnight);
+
+        // Act
+        List<Move> whiteMoves = whiteKnight.getAllowedMoves(whiteKnightCoords, board);
+        List<Move> blackMoves = blackKnight.getAllowedMoves(blackKnightCoords, board);
+
+        // Assert
+        assertThat(whiteMoves).allMatch( (move) -> move.getTo().isInBounds() );
+        assertThat(blackMoves).allMatch( (move) -> move.getTo().isInBounds() );
+    }
 }

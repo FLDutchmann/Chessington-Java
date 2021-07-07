@@ -128,4 +128,25 @@ public class BishopTest {
         assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
         assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
+
+    @Test
+    public void bishopCannotMoveOffBoard() {
+        // Arrange
+        Board board = Board.empty();
+        Piece whiteBishop = new Bishop(PlayerColour.WHITE);
+        Coordinates whiteBishopCoords = new Coordinates(0, 0);
+        board.placePiece(whiteBishopCoords, whiteBishop);
+
+        Piece blackBishop = new Bishop(PlayerColour.BLACK);
+        Coordinates blackBishopCoords = new Coordinates(7, 7);
+        board.placePiece(blackBishopCoords, blackBishop);
+
+        // Act
+        List<Move> whiteMoves = whiteBishop.getAllowedMoves(whiteBishopCoords, board);
+        List<Move> blackMoves = blackBishop.getAllowedMoves(blackBishopCoords, board);
+
+        // Assert
+        assertThat(whiteMoves).allMatch( (move) -> move.getTo().isInBounds() );
+        assertThat(blackMoves).allMatch( (move) -> move.getTo().isInBounds() );
+    }
 }
