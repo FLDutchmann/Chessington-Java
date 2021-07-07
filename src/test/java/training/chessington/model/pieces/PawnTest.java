@@ -220,6 +220,50 @@ public class PawnTest {
     }
 
     @Test
+    public void blackCanEnPassant() {
+        // Arrange
+        Board board = Board.empty();
+
+        Piece blackPawn = new Pawn(PlayerColour.BLACK);
+        Coordinates blackCoords = new Coordinates(4, 4);
+        board.placePiece(blackCoords, blackPawn);
+
+        Piece whitePawn = new Pawn(PlayerColour.WHITE);
+        Coordinates whiteCoords = new Coordinates(6, 5);
+        board.placePiece(whiteCoords, whitePawn);
+
+        // Act
+        board.move(whiteCoords, whiteCoords.plus(-2, 0));
+
+        List<Move> moves = blackPawn.getAllowedMoves(blackCoords, board);
+
+        // Assert
+        assertThat(moves).contains(new Move(blackCoords, blackCoords.plus(1, 1)));
+    }
+
+    @Test
+    public void whiteCanEnPassant() {
+        // Arrange
+        Board board = Board.empty();
+
+        Piece blackPawn = new Pawn(PlayerColour.BLACK);
+        Coordinates blackCoords = new Coordinates(1, 4);
+        board.placePiece(blackCoords, blackPawn);
+
+        Piece whitePawn = new Pawn(PlayerColour.WHITE);
+        Coordinates whiteCoords = new Coordinates(3, 5);
+        board.placePiece(whiteCoords, whitePawn);
+
+        // Act
+        board.move(blackCoords, blackCoords.plus(2, 0));
+
+        List<Move> moves = whitePawn.getAllowedMoves(whiteCoords, board);
+
+        // Assert
+        assertThat(moves).contains(new Move(whiteCoords, whiteCoords.plus(-1, -1)));
+    }
+
+    @Test
     public void pawnsCannotMoveDiagonallyOffBoard() {
         // Arrange
         Board board = Board.empty();

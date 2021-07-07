@@ -24,14 +24,25 @@ public class Pawn extends AbstractPiece {
             }
 
             Coordinates upLeft = from.plus(-1, -1);
-            if (from.getCol() != 0 && board.get(upLeft) != null &&
-                    board.get(upLeft).getColour().equals(PlayerColour.BLACK)) {
+            if (from.getCol() != 0 && board.get(upLeft) != null && board.get(upLeft).getColour().equals(PlayerColour.BLACK)) {
                 moves.add(new Move(from, upLeft));
             }
             Coordinates upRight = from.plus(-1, +1);
             if (from.getCol() != 7 && board.get(upRight) != null &&
                     board.get(upRight).getColour().equals(PlayerColour.BLACK)) {
                 moves.add(new Move(from, upRight));
+            }
+
+            // White en Passant to the right condition
+            if ((new Move(from.plus(-2, 1), from.plus(0, 1)).equals(board.getLastMove())) &&
+                    board.get(from.plus(0, 1)).getType().equals(PieceType.PAWN)) {
+                moves.add(new Move(from, upRight));
+            }
+
+            // White en Passant to the left condition
+            if ((new Move(from.plus(-2, -1), from.plus(0, -1)).equals(board.getLastMove())) &&
+                    board.get(from.plus(0, -1)).getType().equals(PieceType.PAWN)) {
+                moves.add(new Move(from, upLeft));
             }
         }
 
@@ -51,6 +62,18 @@ public class Pawn extends AbstractPiece {
             if (from.getCol() != 7 && board.get(downRight) != null &&
                     board.get(downRight).getColour().equals(PlayerColour.WHITE)) {
                 moves.add(new Move(from, downRight));
+            }
+
+            // Black en Passant to the right condition
+            if ((new Move(from.plus(2, 1), from.plus(0, 1)).equals(board.getLastMove())) &&
+                    board.get(from.plus(0, 1)).getType().equals(PieceType.PAWN)) {
+                moves.add(new Move(from, downRight));
+            }
+
+            // Black en Passant to the left condition
+            if ((new Move(from.plus(2, -1), from.plus(0, -1)).equals(board.getLastMove())) &&
+                    board.get(from.plus(0, -1)).getType().equals(PieceType.PAWN)) {
+                moves.add(new Move(from, downLeft));
             }
         }
 
