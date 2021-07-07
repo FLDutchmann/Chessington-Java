@@ -17,24 +17,24 @@ public class BishopTest {
         // Arrange
         Board board = Board.empty();
         Piece bishop = new Bishop(PlayerColour.BLACK);
-        Coordinates rookCoords = new Coordinates(3, 4);
-        board.placePiece(rookCoords, bishop);
+        Coordinates bishopCoords = new Coordinates(3, 4);
+        board.placePiece(bishopCoords, bishop);
 
         // Act
-        List<Move> moves = bishop.getAllowedMoves(rookCoords, board);
+        List<Move> moves = bishop.getAllowedMoves(bishopCoords, board);
 
         // Assert
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(diff, diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(diff, diff)));
         }
         for(int diff = 1; diff < 5; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(diff, -diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(diff, -diff)));
         }
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(-diff, diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(-diff, diff)));
         }
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(-diff, -diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(-diff, -diff)));
         }
     }
 
@@ -43,29 +43,29 @@ public class BishopTest {
         // Arrange
         Board board = Board.empty();
         Piece bishop = new Bishop(PlayerColour.WHITE);
-        Coordinates rookCoords = new Coordinates(3, 4);
-        board.placePiece(rookCoords, bishop);
+        Coordinates bishopCoords = new Coordinates(3, 4);
+        board.placePiece(bishopCoords, bishop);
 
         // Act
-        List<Move> moves = bishop.getAllowedMoves(rookCoords, board);
+        List<Move> moves = bishop.getAllowedMoves(bishopCoords, board);
 
         // Assert
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(diff, diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(diff, diff)));
         }
         for(int diff = 1; diff < 5; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(diff, -diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(diff, -diff)));
         }
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(-diff, diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(-diff, diff)));
         }
         for(int diff = 1; diff < 4; diff++) {
-            assertThat(moves).contains(new Move(rookCoords, rookCoords.plus(-diff, -diff)));
+            assertThat(moves).contains(new Move(bishopCoords, bishopCoords.plus(-diff, -diff)));
         }
     }
 
     @Test
-    public void rookCannotMovePastPieceDiagonally() {
+    public void bishopCannotMovePastPieceDiagonally() {
         // Arrange
         Board board = Board.empty();
         Piece whiteBishop = new Bishop(PlayerColour.WHITE);
@@ -88,7 +88,7 @@ public class BishopTest {
     }
 
     @Test
-    public void rookCanTakePieceOfDifferentColor() {
+    public void bishopCanTakePieceOfDifferentColor() {
         // Arrange
         Board board = Board.empty();
         Piece whiteBishop = new Bishop(PlayerColour.WHITE);
@@ -109,7 +109,7 @@ public class BishopTest {
     }
 
     @Test
-    public void rookCannotTakePieceOfSameColor() {
+    public void bishopCannotTakePieceOfSameColor() {
         // Arrange
         Board board = Board.empty();
         Piece whitePiece = new Bishop(PlayerColour.WHITE);
