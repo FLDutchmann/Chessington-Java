@@ -183,6 +183,7 @@ public class RookTest {
         // Assert
         assertThat(whiteMoves).allMatch( (move) -> move.getTo().isInBounds() );
         assertThat(blackMoves).allMatch( (move) -> move.getTo().isInBounds() );
+
     }
 }
 

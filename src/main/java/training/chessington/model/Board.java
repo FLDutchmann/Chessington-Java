@@ -43,9 +43,21 @@ public class Board {
     }
 
     public void move(Coordinates from, Coordinates to) {
+        if(isEnPassant(from, to)) {
+            if(get(from).getColour() == PlayerColour.BLACK)
+                board[to.getRow()-1][to.getCol()] = null;
+            if(get(from).getColour() == PlayerColour.WHITE)
+                board[to.getRow()+1][to.getCol()] = null;
+        }
+
         board[to.getRow()][to.getCol()] = board[from.getRow()][from.getCol()];
         board[from.getRow()][from.getCol()] = null;
         lastMove = new Move(from, to);
+    }
+
+    public boolean isEnPassant(Coordinates from, Coordinates to) {
+        // A pawn moves to an empty square in a different column if and only if it's attacking en passant
+        return get(from).getType().equals(Piece.PieceType.PAWN) && get(to) == null && to.getCol() != from.getCol();
     }
 
     public void placePiece(Coordinates coords, Piece piece) {
