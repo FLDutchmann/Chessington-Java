@@ -1,6 +1,12 @@
 package training.chessington.model.pieces;
 
+import training.chessington.model.Board;
+import training.chessington.model.Coordinates;
+import training.chessington.model.Move;
 import training.chessington.model.PlayerColour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractPiece implements Piece {
 
@@ -25,5 +31,20 @@ public abstract class AbstractPiece implements Piece {
     @Override
     public String toString() {
         return colour.toString() + " " + type.toString();
+    }
+
+    public List<Move> getMovesInDirection(Coordinates from, Board board, int rowDiff, int colDiff) {
+        List<Move> moves = new ArrayList<>();
+        Coordinates to = from.plus(rowDiff, colDiff);
+        while(to.isInBounds()){
+            if(board.get(to) != null){
+                if(!board.get(to).getColour().equals(this.colour))
+                    moves.add(new Move(from, to));
+                break;
+            }
+            moves.add(new Move(from, to));
+            to = to.plus(rowDiff, colDiff);
+        }
+        return moves;
     }
 }
