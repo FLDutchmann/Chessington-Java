@@ -112,20 +112,20 @@ public class BishopTest {
     public void rookCannotTakePieceOfSameColor() {
         // Arrange
         Board board = Board.empty();
-        Piece whiteBishop = new Bishop(PlayerColour.WHITE);
-        Coordinates whiteBishopCoords = new Coordinates(3, 3);
-        board.placePiece(whiteBishopCoords, whiteBishop);
+        Piece whitePiece = new Bishop(PlayerColour.WHITE);
+        Coordinates whitePieceCoords = new Coordinates(3, 3);
+        board.placePiece(whitePieceCoords, whitePiece);
 
-        Piece blackBishop = new Bishop(PlayerColour.WHITE);
-        Coordinates blackBishopCoords = new Coordinates(5, 5);
-        board.placePiece(blackBishopCoords, blackBishop);
+        Piece otherPiece = new Bishop(PlayerColour.WHITE);
+        Coordinates otherPieceCoords = new Coordinates(5, 5);
+        board.placePiece(otherPieceCoords, otherPiece);
 
         // Act
-        List<Move> whiteMoves = whiteBishop.getAllowedMoves(whiteBishopCoords, board);
-        List<Move> blackMoves = blackBishop.getAllowedMoves(blackBishopCoords, board);
+        List<Move> whiteMoves = whitePiece.getAllowedMoves(whitePieceCoords, board);
+        List<Move> othersMoves = otherPiece.getAllowedMoves(otherPieceCoords, board);
 
         // Assert
-        assertThat(whiteMoves).doesNotContain(new Move(whiteBishopCoords, blackBishopCoords));
-        assertThat(blackMoves).doesNotContain(new Move(blackBishopCoords, whiteBishopCoords));
+        assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
+        assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
 }

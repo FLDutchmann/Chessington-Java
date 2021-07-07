@@ -147,21 +147,21 @@ public class RookTest {
     public void rookCannotTakePieceOfSameColor() {
         // Arrange
         Board board = Board.empty();
-        Piece whiteRook = new Rook(PlayerColour.WHITE);
-        Coordinates whiteRookCoords = new Coordinates(3, 1);
-        board.placePiece(whiteRookCoords, whiteRook);
+        Piece whitePiece = new Rook(PlayerColour.WHITE);
+        Coordinates whitePieceCoords = new Coordinates(3, 1);
+        board.placePiece(whitePieceCoords, whitePiece);
 
-        Piece blackRook = new Rook(PlayerColour.WHITE);
-        Coordinates blackRookCoords = new Coordinates(5, 1);
-        board.placePiece(blackRookCoords, blackRook);
+        Piece otherPiece = new Rook(PlayerColour.WHITE);
+        Coordinates otherPieceCoords = new Coordinates(5, 1);
+        board.placePiece(otherPieceCoords, otherPiece);
 
         // Act
-        List<Move> whiteMoves = whiteRook.getAllowedMoves(whiteRookCoords, board);
-        List<Move> blackMoves = blackRook.getAllowedMoves(blackRookCoords, board);
+        List<Move> whiteMoves = whitePiece.getAllowedMoves(whitePieceCoords, board);
+        List<Move> othersMoves = otherPiece.getAllowedMoves(otherPieceCoords, board);
 
         // Assert
-        assertThat(whiteMoves).doesNotContain(new Move(whiteRookCoords, blackRookCoords));
-        assertThat(blackMoves).doesNotContain(new Move(blackRookCoords, whiteRookCoords));
+        assertThat(whiteMoves).doesNotContain(new Move(whitePieceCoords, otherPieceCoords));
+        assertThat(othersMoves).doesNotContain(new Move(otherPieceCoords, whitePieceCoords));
     }
 }
 
